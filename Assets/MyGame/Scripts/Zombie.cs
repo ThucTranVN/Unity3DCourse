@@ -42,9 +42,28 @@ public class Zombie : MonoBehaviour
     public void TriggerRagdoll(Vector3 force, Vector3 hitPoint)
     {
         EnableRagdoll();
-        Rigidbody hitRigidBody = ragdollRigidbodies.OrderBy(rigidbody => Vector3.Distance(rigidbody.position, hitPoint)).First();
+        //Rigidbody hitRigidBody = ragdollRigidbodies.OrderBy(rigidbody => Vector3.Distance(rigidbody.position, hitPoint)).First();
+        Rigidbody hitRigidBody = FindClosesHitRigidbody(hitPoint);
         hitRigidBody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
         currentState = ZombieState.Ragdoll;
+    }
+
+    private Rigidbody FindClosesHitRigidbody(Vector3 hitPoint)
+    {
+        Rigidbody closestRigibody = null;
+        float closestDistance = 0;
+
+        foreach (var rigidbody in ragdollRigidbodies)
+        {
+            float distance = Vector3.Distance(rigidbody.position, hitPoint);
+            if(closestRigibody == null || distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestRigibody = rigidbody;
+            }
+        }
+
+        return closestRigibody;
     }
 
     private void DisableRagdoll()
