@@ -12,6 +12,7 @@ public class RaycastWeapon : MonoBehaviour
         public TrailRenderer tracer;
     }
 
+    public ActiveWeapon.WeaponSlot weaponSlot;
     public string weaponName;
     public bool isFiring = false;
     public int fireRate = 25;
@@ -104,11 +105,16 @@ public class RaycastWeapon : MonoBehaviour
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.time = maxLifetime;
+            end = hitInfo.point;
+
+            var rigidbody = hitInfo.collider.GetComponent<Rigidbody>();
+            if (rigidbody)
+            {
+                rigidbody.AddForceAtPosition(ray.direction * 10, hitInfo.point, ForceMode.Impulse);
+            }
         }
-        else
-        {
-            bullet.tracer.transform.position = end;
-        }
+
+        bullet.tracer.transform.position = end;
     }
 
     private Bullet CreateBullet(Vector3 position, Vector3 velocity)
