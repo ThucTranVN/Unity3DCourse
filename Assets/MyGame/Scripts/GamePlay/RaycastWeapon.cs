@@ -24,6 +24,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public Transform raycastOrigin;
     public Transform raycastDestination;
+    public WeaponRecoil weaponRecoil;
 
     private Ray ray;
     private RaycastHit hitInfo;
@@ -31,11 +32,17 @@ public class RaycastWeapon : MonoBehaviour
     private List<Bullet> bullets = new List<Bullet>();
     private float maxLifetime = 3f;
 
+    private void Awake()
+    {
+        weaponRecoil = GetComponent<WeaponRecoil>();
+    }
+
     public void StartFiring()
     {
         isFiring = true;
         accumulatedTime = 0f;
         FireBullet();
+        weaponRecoil.Reset();
     }
 
     public void UpdateFiring(float deltaTime)
@@ -82,6 +89,8 @@ public class RaycastWeapon : MonoBehaviour
         Vector3 velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, velocity);
         bullets.Add(bullet);
+
+        weaponRecoil.GenerateRecoil(weaponName);
     }
 
     private Vector3 GetPosition(Bullet bullet)

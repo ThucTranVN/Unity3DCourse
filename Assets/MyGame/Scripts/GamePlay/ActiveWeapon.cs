@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ActiveWeapon : MonoBehaviour
     public Animator rigController;
     public Transform crosshairTarget;
     public Transform[] weaponSlots;
+    public CinemachineFreeLook playerCamera;
 
     private RaycastWeapon[] equippedWeapons = new RaycastWeapon[2];
     private int activeWeaponIdx;
@@ -85,6 +87,8 @@ public class ActiveWeapon : MonoBehaviour
         }
         raycastWeapon = newWeapon;
         raycastWeapon.raycastDestination = crosshairTarget;
+        raycastWeapon.weaponRecoil.playerCamera = playerCamera;
+        raycastWeapon.weaponRecoil.rigController = rigController;
         raycastWeapon.transform.SetParent(weaponSlots[weaponSlotIndex],false);
         equippedWeapons[weaponSlotIndex] = raycastWeapon;
         SetActiveWeapon(newWeapon.weaponSlot);
