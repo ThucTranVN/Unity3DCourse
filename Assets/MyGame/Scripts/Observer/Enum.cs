@@ -4,7 +4,8 @@ public enum ListenType
     ON_PLAYER_DEATH,
     ON_ENEMY_DEATH,
     UPDATE_COUNT_TEXT,
-    UPDATE_USER_INFO
+    UPDATE_USER_INFO,
+    UPDATE_AMMO
 }
 
 public enum UIType

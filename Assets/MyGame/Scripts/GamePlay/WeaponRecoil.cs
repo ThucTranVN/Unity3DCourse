@@ -52,7 +52,7 @@ public class WeaponRecoil : MonoBehaviour
         if(time > 0)
         {
             playerCamera.m_YAxis.Value -= ((verticalRecoil/1000) * Time.deltaTime) / duration;
-            playerCamera.m_XAxis.Value -= ((horizontalRecoil/10) * Time.deltaTime) / duration;
+            playerCamera.m_XAxis.Value += ((horizontalRecoil/10) * Time.deltaTime) / duration;
             time -= Time.deltaTime;
         }
         
