@@ -15,6 +15,7 @@ public class ActiveWeapon : MonoBehaviour
     public Transform crosshairTarget;
     public Transform[] weaponSlots;
     public CinemachineFreeLook playerCamera;
+    public bool isChangingWeapon;
 
     private RaycastWeapon[] equippedWeapons = new RaycastWeapon[2];
     private int activeWeaponIdx;
@@ -75,6 +76,17 @@ public class ActiveWeapon : MonoBehaviour
         {
             ToggleActiveWeapon();
         }
+    }
+
+    public bool IsFiring()
+    {
+        RaycastWeapon currentWeapon = GetActiveWeapon();
+        if (!currentWeapon)
+        {
+            return false;
+        }
+
+        return currentWeapon.isFiring;
     }
 
     public void Equip(RaycastWeapon newWeapon)
@@ -148,6 +160,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private IEnumerator HolsterWeapon(int index)
     {
+        isChangingWeapon = true;
         isHolstered = true;
         var weapon = GetWeapon(index);
         if (weapon)
@@ -159,15 +172,18 @@ public class ActiveWeapon : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             } while (rigController.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
         }
+        isChangingWeapon = false;
     }
 
     private IEnumerator ActivateWeapon(int index)
     {
+        isChangingWeapon = true;
         var weapon = GetWeapon(index);
         if (weapon)
         {
             rigController.SetBool("holster_weapon", false);
             rigController.Play("equip_" + weapon.weaponName);
+            yield return new WaitForSeconds(0.1f);
             do
             {
                 yield return new WaitForEndOfFrame();
@@ -178,6 +194,7 @@ public class ActiveWeapon : MonoBehaviour
                 ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, weapon.ammoCount);
             }
         }
+        isChangingWeapon = false;
     }
 
 }
