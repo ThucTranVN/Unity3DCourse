@@ -39,8 +39,8 @@ public class ActiveWeapon : MonoBehaviour
     void Update()
     {
         var raycastWeapon = GetWeapon(activeWeaponIdx);
-
-        if (raycastWeapon && !isHolstered)
+        bool isNotSprinting = rigController.GetCurrentAnimatorStateInfo(2).shortNameHash == Animator.StringToHash("notSprinting");
+        if (raycastWeapon && !isHolstered && isNotSprinting)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -58,8 +58,6 @@ public class ActiveWeapon : MonoBehaviour
             {
                 raycastWeapon.StopFiring();
             }
-
-
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -152,6 +150,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private IEnumerator SwitchWeapon(int holsterIndex, int activateIndex)
     {
+        rigController.SetInteger("weapon_index", activateIndex);
         yield return StartCoroutine(HolsterWeapon(holsterIndex));
         yield return StartCoroutine(ActivateWeapon(activateIndex));
         activeWeaponIdx = activateIndex;

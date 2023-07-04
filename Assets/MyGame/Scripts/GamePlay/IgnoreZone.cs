@@ -11,4 +11,12 @@ public class IgnoreZone : MonoBehaviour
             other.gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Default")))
+        {
+            other.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        }
+    }
 }
