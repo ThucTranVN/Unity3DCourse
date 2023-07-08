@@ -29203,7 +29203,7 @@ MonoBehaviour:
   weaponSlot: 0
   weaponName: laser
   isFiring: 0
-  fireRate: 25
+  fireRate: 5
   bulletSpeed: 1000
   bulletDrop: 300
   muzzleFlash:
@@ -29217,6 +29217,7 @@ MonoBehaviour:
   magazine: {fileID: 9189178538709055479}
   ammoCount: 30
   totalAmmo: 30
+  damage: 10
 --- !u!114 &1082629491774853516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29229,26 +29230,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facb0bee4711649299e6249eb7950519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
+  characterAiming: {fileID: 0}
   cameraShake: {fileID: 0}
   rigController: {fileID: 0}
+  recoilModifier: 1
   recoilPattern:
-  - {x: 3, y: 5}
-  - {x: 7, y: 5}
-  - {x: 5, y: 5}
-  - {x: 2, y: 5}
-  - {x: 1, y: 5}
-  - {x: -2, y: 5}
-  - {x: -5, y: 5}
-  - {x: -7, y: 5}
-  - {x: -10, y: 5}
-  - {x: -3, y: 5}
-  - {x: -1, y: 5}
-  - {x: -4, y: 5}
-  - {x: 2, y: 5}
-  - {x: 5, y: 5}
-  - {x: 8, y: 5}
-  - {x: 4, y: 5}
+  - {x: 10, y: 10}
+  - {x: 7, y: 10}
+  - {x: 5, y: 10}
+  - {x: 3, y: 10}
+  - {x: 1, y: 10}
+  - {x: -3, y: 10}
+  - {x: -5, y: 10}
+  - {x: -7, y: 10}
+  - {x: -10, y: 10}
+  - {x: -7, y: 10}
+  - {x: -5, y: 10}
+  - {x: -3, y: 10}
+  - {x: 1, y: 10}
+  - {x: 3, y: 10}
+  - {x: 5, y: 10}
+  - {x: 7, y: 10}
+  - {x: 10, y: 10}
   duration: 0.1
 --- !u!114 &4685924576823550027
 MonoBehaviour:
@@ -29300,7 +29303,7 @@ MonoBehaviour:
     m_ImpactRadius: 100
     m_DirectionMode: 0
     m_DissipationMode: 2
-    m_DissipationDistance: 100
+    m_DissipationDistance: 1000
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1001 &9188857472024351851

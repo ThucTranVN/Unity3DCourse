@@ -63,6 +63,7 @@ public class WeaponReload : MonoBehaviour
         droppedMagazine.transform.localScale = Vector3.one;
         droppedMagazine.AddComponent<Rigidbody>();
         droppedMagazine.AddComponent<BoxCollider>();
+        Destroy(droppedMagazine, 5f);
         magazineHand.SetActive(false);
     }
 

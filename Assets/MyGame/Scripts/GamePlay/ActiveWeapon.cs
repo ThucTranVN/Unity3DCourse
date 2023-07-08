@@ -15,14 +15,16 @@ public class ActiveWeapon : MonoBehaviour
     public Transform crosshairTarget;
     public Transform[] weaponSlots;
     public CharacterAiming characterAiming;
+    public WeaponReload reload;
     public bool isChangingWeapon;
 
     private RaycastWeapon[] equippedWeapons = new RaycastWeapon[2];
     private int activeWeaponIdx;
     private bool isHolstered = false;
 
-    private void Awake()
+    void Start()
     {
+        reload = GetComponent<WeaponReload>();
         RaycastWeapon existWeapon = GetComponentInChildren<RaycastWeapon>();
         if (existWeapon)
         {
@@ -30,31 +32,21 @@ public class ActiveWeapon : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
-
     void Update()
     {
         var raycastWeapon = GetWeapon(activeWeaponIdx);
         bool isNotSprinting = rigController.GetCurrentAnimatorStateInfo(2).shortNameHash == Animator.StringToHash("notSprinting");
-        if (raycastWeapon && !isHolstered && isNotSprinting)
+        bool canFire = !isHolstered && isNotSprinting && !reload.isReloading;
+        if (raycastWeapon)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && canFire && !raycastWeapon.isFiring)
             {
                 raycastWeapon.StartFiring();
             }
 
-            if (raycastWeapon.isFiring)
-            {
-                raycastWeapon.UpdateFiring(Time.deltaTime);
-            }
+            raycastWeapon.UpdateWeapon(Time.deltaTime, crosshairTarget.position);
 
-            raycastWeapon.UpdateBullets(Time.deltaTime);
-
-            if (Input.GetButtonUp("Fire1"))
+            if (Input.GetButtonUp("Fire1") || !canFire)
             {
                 raycastWeapon.StopFiring();
             }
@@ -68,11 +60,11 @@ public class ActiveWeapon : MonoBehaviour
             {
                 SetActiveWeapon(WeaponSlot.Secondary);
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            ToggleActiveWeapon();
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                ToggleActiveWeapon();
+            }
         }
     }
 

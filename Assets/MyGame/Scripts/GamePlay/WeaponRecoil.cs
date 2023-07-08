@@ -6,13 +6,17 @@ using Cinemachine;
 public class WeaponRecoil : MonoBehaviour
 {
 
-    [HideInInspector] public CharacterAiming characterAiming;
-    [HideInInspector] public CinemachineImpulseSource cameraShake;
-    [HideInInspector] public Animator rigController;
+    [HideInInspector]
+    public CharacterAiming characterAiming;
+    [HideInInspector]
+    public CinemachineImpulseSource cameraShake;
+    [HideInInspector]
+    public Animator rigController;
+    [HideInInspector]
+    public float recoilModifier = 1f;
 
     public Vector2[] recoilPattern;
     public float duration;
-    public float recoilModifier = 1f;
 
     private float time;
     private int index;
@@ -50,12 +54,11 @@ public class WeaponRecoil : MonoBehaviour
 
     private void Update()
     {
-        if(time > 0)
+        if (time > 0)
         {
-            characterAiming.yAxis.Value -= (((verticalRecoil/10) * Time.deltaTime) / duration) * recoilModifier;
-            characterAiming.xAxis.Value += (((horizontalRecoil/10) * Time.deltaTime) / duration) * recoilModifier;
+            characterAiming.yAxis.Value -= (((verticalRecoil / 10) * Time.deltaTime) / duration) * recoilModifier;
+            characterAiming.xAxis.Value += (((horizontalRecoil / 10) * Time.deltaTime) / duration) * recoilModifier;
             time -= Time.deltaTime;
         }
-        
     }
 }

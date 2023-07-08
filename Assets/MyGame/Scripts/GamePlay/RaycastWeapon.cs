@@ -29,6 +29,7 @@ public class RaycastWeapon : MonoBehaviour
 
     public int ammoCount;
     public int totalAmmo;
+    public float damage = 10f;
 
     private Ray ray;
     private RaycastHit hitInfo;
@@ -44,20 +45,11 @@ public class RaycastWeapon : MonoBehaviour
     public void StartFiring()
     {
         isFiring = true;
-        accumulatedTime = 0f;
-        FireBullet();
-        weaponRecoil.Reset();
-    }
-
-    public void UpdateFiring(float deltaTime)
-    {
-        accumulatedTime += deltaTime;
-        float fireInterval = 1.0f / fireRate;
-        while (accumulatedTime >= 0f)
+        if (accumulatedTime > 0.0f)
         {
-            FireBullet();
-            accumulatedTime -= fireInterval;
+            accumulatedTime = 0.0f;
         }
+        weaponRecoil.Reset();
     }
 
     public void StopFiring()
@@ -65,7 +57,36 @@ public class RaycastWeapon : MonoBehaviour
         isFiring = false;
     }
 
-    public void UpdateBullets(float deltaTime)
+    public void UpdateWeapon(float deltaTime, Vector3 target)
+    {
+        if (isFiring)
+        {
+            UpdateFiring(deltaTime, target);
+        }
+
+        accumulatedTime += deltaTime;
+
+        UpdateBullets(deltaTime);
+    }
+
+    private void UpdateFiring(float deltaTime, Vector3 target)
+    {
+        accumulatedTime += deltaTime;
+        float fireInterval = 1.0f / fireRate;
+        while (accumulatedTime >= 0f)
+        {
+            FireBullet(target);
+            accumulatedTime -= fireInterval;
+        }
+    }
+
+    private void UpdateBullets(float deltaTime)
+    {
+        SimulateBullet(deltaTime);
+        DestroyBullets();
+    }
+
+    private void SimulateBullet(float deltaTime)
     {
         bullets.ForEach(bullet =>
         {
@@ -74,8 +95,6 @@ public class RaycastWeapon : MonoBehaviour
             Vector3 p1 = GetPosition(bullet);
             RaycastSegment(p0, p1, bullet);
         });
-
-        DestroyBullets();
     }
 
     private void DestroyBullets()
@@ -83,7 +102,7 @@ public class RaycastWeapon : MonoBehaviour
         bullets.RemoveAll(bullet => bullet.time >= maxLifetime);
     }
 
-    private void FireBullet()
+    private void FireBullet(Vector3 target)
     {
         if(ammoCount <= 0)
         {
@@ -99,7 +118,7 @@ public class RaycastWeapon : MonoBehaviour
             item.Emit(1);
         }
 
-        Vector3 velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
+        Vector3 velocity = (target - raycastOrigin.position).normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, velocity);
         bullets.Add(bullet);
 
@@ -134,20 +153,23 @@ public class RaycastWeapon : MonoBehaviour
             {
                 rigidbody.AddForceAtPosition(ray.direction * 10, hitInfo.point, ForceMode.Impulse);
             }
-        }
 
+            var hitBox = hitInfo.collider.GetComponent<HitBox>();
+            if (hitBox)
+            {
+                hitBox.OnHit(this, ray.direction);
+            }
+        }
         bullet.tracer.transform.position = end;
     }
 
     private Bullet CreateBullet(Vector3 position, Vector3 velocity)
     {
-        Bullet bullet = new Bullet()
-        {
-            initialPosition = position,
-            initialVelocity = velocity,
-            time = 0f,
-            tracer = Instantiate(tracerEffect, position, Quaternion.identity)
-        };
+        Bullet bullet = new Bullet();
+        bullet.initialPosition = position;
+        bullet.initialVelocity = velocity;
+        bullet.time = 0f;
+        bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
         bullet.tracer.AddPosition(position);
         return bullet;
     }
