@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float maxHealth;
-    public float blinkDuration = 0.1f;
-    public float dieForce;
+    private float maxHealth;
+    private float blinkDuration;
     private float currentHealth;
     private Ragdoll ragdoll;
     private UIHealthBar healthBar;
     private SkinnedMeshRenderer skinnedMeshRenderer;
+    private AiAgent aiAgent;
 
     void Start()
     {
+        if (DataManager.HasInstance)
+        {
+            maxHealth = DataManager.Instance.globalConfig.maxHealth;
+            blinkDuration = DataManager.Instance.globalConfig.blinkDuration;
+        }
         currentHealth = maxHealth;
         ragdoll = GetComponent<Ragdoll>();
         healthBar = GetComponentInChildren<UIHealthBar>();
+        aiAgent = GetComponent<AiAgent>();
         skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         SetUp();
     }
@@ -56,10 +62,14 @@ public class Health : MonoBehaviour
 
     private void Die(Vector3 direction , Rigidbody rigidbody)
     {
-        ragdoll.ActiveRagdoll();
-        direction.y = 1f;
-        ragdoll.ApplyForce(direction * dieForce , rigidbody);
-        healthBar.Deactive();
+        AiDeathState deathState = aiAgent.stateMachine.GetState(AiStateID.Death) as AiDeathState;
+        deathState.direction = direction;
+        deathState.rigidbody = rigidbody;
+        aiAgent.stateMachine.ChangeState(AiStateID.Death);
+    }
+
+    public void DestroyWhenDeath()
+    {
         Destroy(this.gameObject, 3f);
     }
 }

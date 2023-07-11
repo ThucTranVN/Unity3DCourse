@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AiDeathState : AiState
 {
+    private float dieForce;
+    public Vector3 direction;
+    public Rigidbody rigidbody;
+
     public AiStateID GetID()
     {
         return AiStateID.Death;
@@ -11,7 +15,15 @@ public class AiDeathState : AiState
 
     public void Enter(AiAgent agent)
     {
-        
+        if (DataManager.HasInstance)
+        {
+            dieForce = DataManager.Instance.globalConfig.dieForce;
+        }
+        agent.ragdoll.ActiveRagdoll();
+        direction.y = 1f;
+        agent.ragdoll.ApplyForce(direction * dieForce, rigidbody);
+        agent.healthBar.Deactive();
+        agent.health.DestroyWhenDeath();
     }
 
     public void Exit(AiAgent agent)

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class AiChasePlayerState : AiState
 {
-    public Transform playerTransform;
     private float timer = 0f;
     private float maxDistance;
     private float maxTime;
@@ -17,11 +16,6 @@ public class AiChasePlayerState : AiState
 
     public void Enter(AiAgent agent)
     {
-        if (playerTransform == null)
-        {
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-
         if (DataManager.HasInstance)
         {
             maxDistance = DataManager.Instance.globalConfig.maxDistance;
@@ -40,18 +34,18 @@ public class AiChasePlayerState : AiState
 
         if (!agent.navMeshAgent.hasPath)
         {
-            agent.navMeshAgent.destination = playerTransform.position;
+            agent.navMeshAgent.destination = agent.playerTransform.position;
         }
 
         if (timer < 0f)
         {
-            Vector3 direction = playerTransform.position - agent.navMeshAgent.destination;
+            Vector3 direction = agent.playerTransform.position - agent.navMeshAgent.destination;
             direction.y = 0;
             if (direction.sqrMagnitude > maxDistance * maxDistance)
             {
                 if (agent.navMeshAgent.pathStatus != NavMeshPathStatus.PathPartial)
                 {
-                    agent.navMeshAgent.destination = playerTransform.position;
+                    agent.navMeshAgent.destination = agent.playerTransform.position;
                 }
             }
             timer = maxTime;
