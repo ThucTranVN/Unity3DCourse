@@ -5,34 +5,24 @@ using UnityEngine.AI;
 
 public class AiLocomotion : MonoBehaviour
 {
-    public Transform playerTransform;
-    public float maxTime = 1f;
-    public float maxDistance = 1f;
-
-    private NavMeshAgent aiAgent;
+    private NavMeshAgent navMeshAgent;
     private Animator animator;
-    private float timer = 0f;
 
     void Start()
     {
-        aiAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0f)
+        if (navMeshAgent.hasPath)
         {
-            float distance = (playerTransform.position - aiAgent.destination).sqrMagnitude;
-            if(distance > maxDistance * maxDistance)
-            {
-                aiAgent.destination = playerTransform.position;
-            }
-            timer = maxTime;
-
+            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
         }
-        
-        animator.SetFloat("Speed", aiAgent.velocity.magnitude);
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }  
     }
 }
