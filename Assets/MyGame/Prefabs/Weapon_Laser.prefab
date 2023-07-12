@@ -29205,7 +29205,7 @@ MonoBehaviour:
   isFiring: 0
   fireRate: 5
   bulletSpeed: 1000
-  bulletDrop: 300
+  bulletDrop: 100
   muzzleFlash:
   - {fileID: 8227528519844208928}
   - {fileID: 8227808573485425030}
@@ -29235,23 +29235,23 @@ MonoBehaviour:
   rigController: {fileID: 0}
   recoilModifier: 1
   recoilPattern:
-  - {x: 10, y: 10}
-  - {x: 7, y: 10}
-  - {x: 5, y: 10}
-  - {x: 3, y: 10}
-  - {x: 1, y: 10}
-  - {x: -3, y: 10}
-  - {x: -5, y: 10}
-  - {x: -7, y: 10}
-  - {x: -10, y: 10}
-  - {x: -7, y: 10}
-  - {x: -5, y: 10}
-  - {x: -3, y: 10}
-  - {x: 1, y: 10}
-  - {x: 3, y: 10}
-  - {x: 5, y: 10}
-  - {x: 7, y: 10}
-  - {x: 10, y: 10}
+  - {x: 5, y: 5}
+  - {x: 4, y: 5}
+  - {x: 3, y: 5}
+  - {x: 2, y: 5}
+  - {x: 1, y: 5}
+  - {x: 0, y: 5}
+  - {x: -1, y: 5}
+  - {x: -2, y: 5}
+  - {x: -3, y: 5}
+  - {x: -4, y: 5}
+  - {x: -5, y: 5}
+  - {x: 0, y: 5}
+  - {x: 1, y: 5}
+  - {x: 2, y: 5}
+  - {x: 3, y: 5}
+  - {x: 4, y: 5}
+  - {x: 5, y: 5}
   duration: 0.1
 --- !u!114 &4685924576823550027
 MonoBehaviour:

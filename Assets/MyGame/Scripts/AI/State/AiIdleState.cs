@@ -16,7 +16,7 @@ public class AiIdleState : AiState
     {
         if (DataManager.HasInstance)
         {
-            maxSightDistance = DataManager.Instance.globalConfig.maxDistance;
+            maxSightDistance = DataManager.Instance.GlobalConfig.maxSight;
         }
     }
 
@@ -28,6 +28,7 @@ public class AiIdleState : AiState
     public void Update(AiAgent agent)
     {
         playerDirection = agent.playerTransform.position - agent.transform.position;
+
         if(playerDirection.magnitude > maxSightDistance)
         {
             return;

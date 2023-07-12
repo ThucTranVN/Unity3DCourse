@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class DataManager : BaseManager<DataManager>
 {
-    public GlobalConfig globalConfig;
+    public GlobalConfig GlobalConfig;
 }

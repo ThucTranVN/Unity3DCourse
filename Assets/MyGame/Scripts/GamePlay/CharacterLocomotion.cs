@@ -5,13 +5,13 @@ using UnityEngine;
 public class CharacterLocomotion : MonoBehaviour
 {
     public Animator rigController;
-    public float jumpHeight;
-    public float gravity;
-    public float stepDown;
-    public float airControl;
-    public float jumpDamp;
-    public float groundSpeed;
-    public float pushPower;
+    private float jumpHeight;
+    private float gravity;
+    private float stepDown;
+    private float airControl;
+    private float jumpDamp;
+    private float groundSpeed;
+    private float pushPower;
 
     private Animator animator;
     private CharacterController characterController;
@@ -32,6 +32,16 @@ public class CharacterLocomotion : MonoBehaviour
         activeWeapon = GetComponent<ActiveWeapon>();
         reloadWeapon = GetComponent<WeaponReload>();
         characterAiming = GetComponent<CharacterAiming>();
+        if (DataManager.HasInstance)
+        {
+            jumpHeight = DataManager.Instance.GlobalConfig.jumpHeight;
+            gravity = DataManager.Instance.GlobalConfig.gravity;
+            stepDown = DataManager.Instance.GlobalConfig.stepDown;
+            airControl = DataManager.Instance.GlobalConfig.airControl;
+            jumpDamp = DataManager.Instance.GlobalConfig.jumpDamp;
+            groundSpeed = DataManager.Instance.GlobalConfig.groundSpeed;
+            pushPower = DataManager.Instance.GlobalConfig.pushPower;
+        }
     }
 
     void Update()

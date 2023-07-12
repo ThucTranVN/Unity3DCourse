@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class RaycastWeapon : MonoBehaviour
 {
-    class Bullet
-    {
-        public float time;
-        public Vector3 initialPosition;
-        public Vector3 initialVelocity;
-        public TrailRenderer tracer;
-    }
-
-    public ActiveWeapon.WeaponSlot weaponSlot;
+    public WeaponSlot weaponSlot;
     public string weaponName;
     public bool isFiring = false;
     public int fireRate = 25;
@@ -34,7 +26,6 @@ public class RaycastWeapon : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     private float accumulatedTime;
-    private List<Bullet> bullets = new List<Bullet>();
     private float maxLifetime = 3f;
 
     private void Awake()
@@ -88,7 +79,7 @@ public class RaycastWeapon : MonoBehaviour
 
     private void SimulateBullet(float deltaTime)
     {
-        bullets.ForEach(bullet =>
+        ObjectPool.Instance.pooledObjects.ForEach(bullet =>
         {
             Vector3 p0 = GetPosition(bullet);
             bullet.time += deltaTime;
@@ -99,7 +90,13 @@ public class RaycastWeapon : MonoBehaviour
 
     private void DestroyBullets()
     {
-        bullets.RemoveAll(bullet => bullet.time >= maxLifetime);
+        foreach (Bullet bullet in ObjectPool.Instance.pooledObjects)
+        {
+            if(bullet.time >= maxLifetime)
+            {
+                bullet.Deactive();
+            }
+        }
     }
 
     private void FireBullet(Vector3 target)
@@ -108,19 +105,23 @@ public class RaycastWeapon : MonoBehaviour
         {
             return;
         }
+
         ammoCount--;
+
         if (ListenerManager.HasInstance)
         {
             ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, ammoCount);
         }
+
         foreach (var item in muzzleFlash)
         {
             item.Emit(1);
         }
 
         Vector3 velocity = (target - raycastOrigin.position).normalized * bulletSpeed;
-        var bullet = CreateBullet(raycastOrigin.position, velocity);
-        bullets.Add(bullet);
+
+        var bullet = ObjectPool.Instance.GetPooledObject();
+        bullet.Active(raycastOrigin.position, velocity);
 
         weaponRecoil.GenerateRecoil(weaponName);
     }
@@ -144,10 +145,9 @@ public class RaycastWeapon : MonoBehaviour
             hitEffect.transform.forward = hitInfo.normal;
             hitEffect.Emit(1);
 
-            bullet.tracer.transform.position = hitInfo.point;
+            bullet.transform.position = hitInfo.point;
             bullet.time = maxLifetime;
             end = hitInfo.point;
-
             var rigidbody = hitInfo.collider.GetComponent<Rigidbody>();
             if (rigidbody)
             {
@@ -160,17 +160,6 @@ public class RaycastWeapon : MonoBehaviour
                 hitBox.OnHit(this, ray.direction);
             }
         }
-        bullet.tracer.transform.position = end;
-    }
-
-    private Bullet CreateBullet(Vector3 position, Vector3 velocity)
-    {
-        Bullet bullet = new Bullet();
-        bullet.initialPosition = position;
-        bullet.initialVelocity = velocity;
-        bullet.time = 0f;
-        bullet.tracer = Instantiate(tracerEffect, position, Quaternion.identity);
-        bullet.tracer.AddPosition(position);
-        return bullet;
+        bullet.transform.position = end;
     }
 }

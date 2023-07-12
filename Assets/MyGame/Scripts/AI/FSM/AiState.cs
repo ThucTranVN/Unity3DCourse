@@ -1,14 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum AiStateID
-{
-    ChasePlayer,
-    Death,
-    Idle
-}
-
 public interface AiState
 {
     AiStateID GetID();

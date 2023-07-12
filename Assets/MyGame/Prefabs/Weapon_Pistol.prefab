@@ -28966,7 +28966,7 @@ MonoBehaviour:
   magazine: {fileID: 5122529342688488634}
   ammoCount: 15
   totalAmmo: 15
-  damage: 5
+  damage: 10
 --- !u!114 &-5712687851035014815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28982,10 +28982,10 @@ MonoBehaviour:
   characterAiming: {fileID: 0}
   cameraShake: {fileID: 0}
   rigController: {fileID: 0}
+  recoilModifier: 1
   recoilPattern:
   - {x: 0, y: 10}
   duration: 0
-  recoilModifier: 1
 --- !u!114 &-350855139300653402
 MonoBehaviour:
   m_ObjectHideFlags: 0

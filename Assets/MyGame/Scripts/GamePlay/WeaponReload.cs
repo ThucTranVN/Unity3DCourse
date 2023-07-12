@@ -11,10 +11,15 @@ public class WeaponReload : MonoBehaviour
     public bool isReloading;
 
     private GameObject magazineHand;
+    private float timeDestroyDroppedMagazine;
 
     void Start()
     {
         animationEvents.WeaponAnimEvent.AddListener(OnAnimationEvent);
+        if (DataManager.HasInstance)
+        {
+            timeDestroyDroppedMagazine = DataManager.Instance.GlobalConfig.timeDestroyDroppedMagazine;
+        }
     }
 
     void Update()
@@ -63,7 +68,7 @@ public class WeaponReload : MonoBehaviour
         droppedMagazine.transform.localScale = Vector3.one;
         droppedMagazine.AddComponent<Rigidbody>();
         droppedMagazine.AddComponent<BoxCollider>();
-        Destroy(droppedMagazine, 5f);
+        Destroy(droppedMagazine, timeDestroyDroppedMagazine);
         magazineHand.SetActive(false);
     }
 

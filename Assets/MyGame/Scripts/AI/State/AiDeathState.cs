@@ -17,7 +17,7 @@ public class AiDeathState : AiState
     {
         if (DataManager.HasInstance)
         {
-            dieForce = DataManager.Instance.globalConfig.dieForce;
+            dieForce = DataManager.Instance.GlobalConfig.dieForce;
         }
         agent.ragdoll.ActiveRagdoll();
         direction.y = 1f;

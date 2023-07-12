@@ -11,13 +11,15 @@ public class Health : MonoBehaviour
     private UIHealthBar healthBar;
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private AiAgent aiAgent;
+    private float timeDestroyAI;
 
     void Start()
     {
         if (DataManager.HasInstance)
         {
-            maxHealth = DataManager.Instance.globalConfig.maxHealth;
-            blinkDuration = DataManager.Instance.globalConfig.blinkDuration;
+            maxHealth = DataManager.Instance.GlobalConfig.maxHealth;
+            blinkDuration = DataManager.Instance.GlobalConfig.blinkDuration;
+            timeDestroyAI = DataManager.Instance.GlobalConfig.timeDestroyAI;
         }
         currentHealth = maxHealth;
         ragdoll = GetComponent<Ragdoll>();
@@ -70,6 +72,6 @@ public class Health : MonoBehaviour
 
     public void DestroyWhenDeath()
     {
-        Destroy(this.gameObject, 3f);
+        Destroy(this.gameObject, timeDestroyAI);
     }
 }

@@ -5,7 +5,9 @@ using Cinemachine;
 
 public class CharacterAiming : MonoBehaviour
 {
-    public float turnSpeed = 15;
+    private float turnSpeed;
+    private float defaultRecoil;
+    private float aimRecoil;
     public Transform cameraLookAt;
     public AxisState xAxis;
     public AxisState yAxis;
@@ -27,16 +29,25 @@ public class CharacterAiming : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (DataManager.HasInstance)
+        {
+            turnSpeed = DataManager.Instance.GlobalConfig.turnSpeed;
+            defaultRecoil = DataManager.Instance.GlobalConfig.defaultRecoil;
+            aimRecoil = DataManager.Instance.GlobalConfig.aimRecoil;
+        }
     }
 
     private void Update()
     {
-        isAiming = Input.GetMouseButton(1);
-        animator.SetBool(isAimingParam, isAiming);
         var weapon = activeWeapon.GetActiveWeapon();
         if (weapon)
         {
-            weapon.weaponRecoil.recoilModifier = isAiming ? 0.3f : 1f;
+            if (activeWeapon.canFire)
+            {
+                isAiming = Input.GetMouseButton(1);
+                animator.SetBool(isAimingParam, isAiming);
+                weapon.weaponRecoil.recoilModifier = isAiming ? aimRecoil : defaultRecoil;
+            } 
         }
     }
 

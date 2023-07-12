@@ -7,10 +7,19 @@ public class CrosshairTarget : MonoBehaviour
     private Camera mainCamera;
     private Ray ray;
     private RaycastHit hitInfo;
+    private float maxCroissHairTargetDistance;
 
     private void Awake()
     {
         mainCamera = Camera.main;
+    }
+
+    private void Start()
+    {
+        if (DataManager.HasInstance)
+        {
+            maxCroissHairTargetDistance = DataManager.Instance.GlobalConfig.maxCroissHairTargetDistance;
+        }
     }
 
     void Update()
@@ -23,7 +32,7 @@ public class CrosshairTarget : MonoBehaviour
         }
         else
         {
-            transform.position = ray.GetPoint(100f);
+            transform.position = ray.GetPoint(maxCroissHairTargetDistance);
         }
     }
 }

@@ -5,18 +5,13 @@ using Cinemachine;
 
 public class ActiveWeapon : MonoBehaviour
 {
-    public enum WeaponSlot
-    {
-        Primary = 0,
-        Secondary = 1
-    }
-
     public Animator rigController;
     public Transform crosshairTarget;
     public Transform[] weaponSlots;
     public CharacterAiming characterAiming;
     public WeaponReload reload;
     public bool isChangingWeapon;
+    public bool canFire;
 
     private RaycastWeapon[] equippedWeapons = new RaycastWeapon[2];
     private int activeWeaponIdx;
@@ -36,7 +31,7 @@ public class ActiveWeapon : MonoBehaviour
     {
         var raycastWeapon = GetWeapon(activeWeaponIdx);
         bool isNotSprinting = rigController.GetCurrentAnimatorStateInfo(2).shortNameHash == Animator.StringToHash("notSprinting");
-        bool canFire = !isHolstered && isNotSprinting && !reload.isReloading;
+        canFire = !isHolstered && isNotSprinting && !reload.isReloading;
         if (raycastWeapon)
         {
             if (Input.GetButtonDown("Fire1") && canFire && !raycastWeapon.isFiring)

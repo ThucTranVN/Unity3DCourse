@@ -18,8 +18,8 @@ public class AiChasePlayerState : AiState
     {
         if (DataManager.HasInstance)
         {
-            maxDistance = DataManager.Instance.globalConfig.maxDistance;
-            maxTime = DataManager.Instance.globalConfig.maxTime;
+            maxDistance = DataManager.Instance.GlobalConfig.maxDistance;
+            maxTime = DataManager.Instance.GlobalConfig.maxTime;
         }
     }
 
