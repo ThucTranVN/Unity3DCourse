@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2266396315641379008}
   - component: {fileID: 2135592689140755434}
   - component: {fileID: 2136860446666747266}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 2264370209283942792}
   - component: {fileID: 2134995897945455150}
   - component: {fileID: 2136686064675151024}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HitEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9739,7 +9739,7 @@ GameObject:
   - component: {fileID: 2265911702981957344}
   - component: {fileID: 2135623897402540468}
   - component: {fileID: 2134767312064209130}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14406,7 +14406,7 @@ GameObject:
   - component: {fileID: 2266431393375294172}
   - component: {fileID: 2135534436036588118}
   - component: {fileID: 2136945433745481688}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19081,7 +19081,7 @@ GameObject:
   - component: {fileID: 8133933079185341878}
   - component: {fileID: 8113693019193581764}
   - component: {fileID: 8122917244011097564}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_Wep_Rifle_Laser_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19166,7 +19166,7 @@ GameObject:
   - component: {fileID: 8133799726409125998}
   - component: {fileID: 8227528519844208928}
   - component: {fileID: 8226450363018560434}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MuzzleFlash01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24048,7 +24048,7 @@ GameObject:
   - component: {fileID: 8133715464942831554}
   - component: {fileID: 8227808573485425030}
   - component: {fileID: 8226521777458217258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FlashHeadon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28930,7 +28930,7 @@ GameObject:
   - component: {fileID: 8133907850510812504}
   - component: {fileID: 8113276932592320594}
   - component: {fileID: 8123745987206336342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_Wep_Rifle_Laser_Trigger_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29013,7 +29013,7 @@ GameObject:
   - component: {fileID: 8142314292259982406}
   - component: {fileID: 8112733818515716462}
   - component: {fileID: 8123623008808304276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_Wep_Rifle_Laser_Mag_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29094,7 +29094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8137521351786981099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RaycastOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29125,7 +29125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8137521353104888668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29162,7 +29162,7 @@ GameObject:
   - component: {fileID: 8137521353425499417}
   - component: {fileID: 1082629491774853516}
   - component: {fileID: 4685924576823550027}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon_Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29235,23 +29235,36 @@ MonoBehaviour:
   rigController: {fileID: 0}
   recoilModifier: 1
   recoilPattern:
-  - {x: 5, y: 5}
-  - {x: 4, y: 5}
-  - {x: 3, y: 5}
-  - {x: 2, y: 5}
-  - {x: 1, y: 5}
-  - {x: 0, y: 5}
-  - {x: -1, y: 5}
-  - {x: -2, y: 5}
-  - {x: -3, y: 5}
-  - {x: -4, y: 5}
-  - {x: -5, y: 5}
-  - {x: 0, y: 5}
-  - {x: 1, y: 5}
-  - {x: 2, y: 5}
-  - {x: 3, y: 5}
-  - {x: 4, y: 5}
-  - {x: 5, y: 5}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1.2}
+  - {x: 0, y: 1.4}
+  - {x: 0, y: 1.6}
+  - {x: 0, y: 1.8}
+  - {x: 0, y: 2}
+  - {x: 0, y: 2.2}
+  - {x: 0, y: 2.4}
+  - {x: 0, y: 2.6}
+  - {x: 0, y: 2.7}
+  - {x: 0, y: 2.8}
+  - {x: 0.5, y: 3}
+  - {x: -0.5, y: 3.2}
+  - {x: -0.4, y: 3.2}
+  - {x: -0.2, y: 3.2}
+  - {x: 0.5, y: 3.3}
+  - {x: -0.5, y: 3.4}
+  - {x: 0.5, y: 3.5}
+  - {x: -0.5, y: 3.6}
+  - {x: 0.5, y: 3.7}
+  - {x: -0.5, y: 3.8}
+  - {x: 0.6, y: 3.9}
+  - {x: 0.6, y: 4}
+  - {x: 0.6, y: 4}
+  - {x: 0.7, y: 5}
+  - {x: 1, y: 4}
+  - {x: -0.5, y: 4}
+  - {x: -0.5, y: 4}
+  - {x: -0.8, y: 4}
+  - {x: 2, y: 4}
   duration: 0.1
 --- !u!114 &4685924576823550027
 MonoBehaviour:
@@ -29316,6 +29329,10 @@ PrefabInstance:
     - target: {fileID: 1095244423750556, guid: 55ff4510a8f242c428a6fefd45ff3514, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Mag_Plasma_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095244423750556, guid: 55ff4510a8f242c428a6fefd45ff3514, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4748160850954230, guid: 55ff4510a8f242c428a6fefd45ff3514, type: 3}
       propertyPath: m_RootOrder
