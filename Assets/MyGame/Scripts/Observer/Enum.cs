@@ -37,3 +37,9 @@ public enum SocketID
     RightLeg,
     RightHand
 }
+
+public enum EquipWeaponBy
+{
+    Player,
+    AI
+}

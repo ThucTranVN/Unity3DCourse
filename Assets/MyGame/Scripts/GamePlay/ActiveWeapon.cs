@@ -91,7 +91,7 @@ public class ActiveWeapon : MonoBehaviour
         SetActiveWeapon(newWeapon.weaponSlot);
         if (ListenerManager.HasInstance)
         {
-            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, raycastWeapon.ammoCount);
+            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, raycastWeapon);
         }
     }
 
@@ -177,7 +177,7 @@ public class ActiveWeapon : MonoBehaviour
             isHolstered = false;
             if (ListenerManager.HasInstance)
             {
-                ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, weapon.ammoCount);
+                ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, weapon);
             }
         }
         isChangingWeapon = false;

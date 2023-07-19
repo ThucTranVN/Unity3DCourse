@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RaycastWeapon : MonoBehaviour
 {
+    public EquipWeaponBy equipWeaponBy;
     public WeaponSlot weaponSlot;
     public string weaponName;
     public bool isFiring = false;
@@ -110,7 +111,7 @@ public class RaycastWeapon : MonoBehaviour
 
         if (ListenerManager.HasInstance)
         {
-            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, ammoCount);
+            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, this);
         }
 
         foreach (var item in muzzleFlash)

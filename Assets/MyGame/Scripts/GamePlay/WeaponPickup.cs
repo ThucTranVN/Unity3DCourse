@@ -12,6 +12,7 @@ public class WeaponPickup : MonoBehaviour
         if (activeWeapon)
         {
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+            newWeapon.equipWeaponBy = EquipWeaponBy.Player;
             activeWeapon.Equip(newWeapon);
             Destroy(gameObject);
         }
@@ -20,6 +21,7 @@ public class WeaponPickup : MonoBehaviour
         if (aiWeapon)
         {
             RaycastWeapon newWeapon = Instantiate(weaponPrefab);
+            newWeapon.equipWeaponBy = EquipWeaponBy.AI;
             aiWeapon.EquipWeapon(newWeapon);
             Destroy(gameObject);
         }

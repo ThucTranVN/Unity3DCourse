@@ -86,7 +86,7 @@ public class WeaponReload : MonoBehaviour
         rigController.ResetTrigger("reload_weapon");
         if (ListenerManager.HasInstance)
         {
-            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, weapon.ammoCount);
+            ListenerManager.Instance.BroadCast(ListenType.UPDATE_AMMO, weapon);
         }
         isReloading = false;
     }
