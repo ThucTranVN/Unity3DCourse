@@ -15,8 +15,8 @@ TagManager:
   - DetectZone
   - Player
   - Gun
-  - 
-  - 
+  - Pickup
+  - Enemy
   - 
   - 
   - 

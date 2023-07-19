@@ -29162,6 +29162,7 @@ GameObject:
   - component: {fileID: 8137521353425499417}
   - component: {fileID: 1082629491774853516}
   - component: {fileID: 4685924576823550027}
+  - component: {fileID: 6889183305855273613}
   m_Layer: 9
   m_Name: Weapon_Laser
   m_TagString: Untagged
@@ -29319,6 +29320,19 @@ MonoBehaviour:
     m_DissipationDistance: 1000
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!65 &6889183305855273613
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137521353425499419}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1012793, y: 0.3028079, z: 1}
+  m_Center: {x: -0.006160587, y: -0.1508766, z: 0.4619701}
 --- !u!1001 &9188857472024351851
 PrefabInstance:
   m_ObjectHideFlags: 0
