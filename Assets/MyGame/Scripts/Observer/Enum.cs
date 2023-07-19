@@ -21,11 +21,19 @@ public enum AiStateID
 {
     ChasePlayer,
     Death,
-    Idle
+    Idle,
+    FindWeapon,
+    Attack
 }
 
 public enum WeaponSlot
 {
     Primary = 0,
     Secondary = 1
+}
+
+public enum SocketID
+{
+    RightLeg,
+    RightHand
 }

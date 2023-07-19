@@ -13,6 +13,7 @@ public class GlobalConfig : ScriptableObject
     public float dieForce = 10f;
     public float maxSight = 5f;
     public float timeDestroyAI = 3f;
+    public float pickupWeaponSpeed = 5f;
 
     [Header("Player")]
     public float jumpHeight = 3f;

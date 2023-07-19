@@ -22,10 +22,19 @@ public class WeaponRecoil : MonoBehaviour
     private int index;
     private float verticalRecoil;
     private float horizontalRecoil;
+    private int recoilLayerIndex = -1;
 
     private void Awake()
     {
         cameraShake = GetComponent<CinemachineImpulseSource>();
+    }
+
+    private void Start()
+    {
+        if (rigController)
+        {
+            recoilLayerIndex = rigController.GetLayerIndex("Recoil Layer");
+        }
     }
 
     public void Reset()
@@ -44,7 +53,10 @@ public class WeaponRecoil : MonoBehaviour
 
         index = NextIndex(index);
 
-        rigController.Play("weapon_recoil_" + weaponName, 1, 0f);
+        if (rigController)
+        {
+            rigController.Play("weapon_recoil_" + weaponName, recoilLayerIndex, 0f);
+        }
     }
 
     private int NextIndex(int index)
