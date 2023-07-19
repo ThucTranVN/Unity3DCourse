@@ -5,13 +5,21 @@ using UnityEngine.AI;
 
 public class AiAgent : MonoBehaviour
 {
-    public AiStateMachine stateMachine;
     public AiStateID initState;
+    [HideInInspector]
+    public AiStateMachine stateMachine;
+    [HideInInspector]
     public NavMeshAgent navMeshAgent;
+    [HideInInspector]
     public Ragdoll ragdoll;
+    [HideInInspector]
     public UIHealthBar healthBar;
+    [HideInInspector]
     public Health health;
+    [HideInInspector]
     public Transform playerTransform;
+    [HideInInspector]
+    public AiWeapon weapons;
 
     void Start()
     {
@@ -23,10 +31,13 @@ public class AiAgent : MonoBehaviour
         health = GetComponent<Health>();
         ragdoll = GetComponent<Ragdoll>();
         healthBar = GetComponentInChildren<UIHealthBar>();
+        weapons = GetComponent<AiWeapon>();
         stateMachine = new AiStateMachine(this);
         stateMachine.RegisterState(new AiChasePlayerState());
         stateMachine.RegisterState(new AiDeathState());
         stateMachine.RegisterState(new AiIdleState());
+        stateMachine.RegisterState(new AiFindWeaponState());
+        stateMachine.RegisterState(new AiAttackPlayerState());
         stateMachine.ChangeState(initState);
     }
 
