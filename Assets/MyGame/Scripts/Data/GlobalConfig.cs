@@ -28,4 +28,7 @@ public class GlobalConfig : ScriptableObject
     public float timeDestroyDroppedMagazine = 5f;
     public float maxCroissHairTargetDistance = 100f;
     public int maxBulletPoolSize = 30;
+
+    [Header("UI")]
+    public float loadingOverLapTime = 1f;
 }
