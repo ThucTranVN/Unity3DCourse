@@ -1,17 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CharacterLocomotion : MonoBehaviour
 {
     public Animator rigController;
-    private float jumpHeight;
-    private float gravity;
-    private float stepDown;
-    private float airControl;
-    private float jumpDamp;
-    private float groundSpeed;
-    private float pushPower;
+    public Volume postProcessVolume;
 
     private Animator animator;
     private CharacterController characterController;
@@ -21,8 +17,14 @@ public class CharacterLocomotion : MonoBehaviour
     private Vector2 userInput;
     private Vector3 rootMotion;
     private Vector3 velocity;
+    private float jumpHeight;
+    private float gravity;
+    private float stepDown;
+    private float airControl;
+    private float jumpDamp;
+    private float groundSpeed;
+    private float pushPower;
     private bool isJumping;
-
     private int isSprintingParam = Animator.StringToHash("IsSprinting");
 
     void Start()
@@ -87,6 +89,10 @@ public class CharacterLocomotion : MonoBehaviour
         bool isSprinting = IsSprinting();
         animator.SetBool(isSprintingParam, isSprinting);
         rigController.SetBool(isSprintingParam, isSprinting);
+        if (postProcessVolume.profile.TryGet(out ChromaticAberration chromaticAberration))
+        {
+            chromaticAberration.active = isSprinting;
+        }
     }
 
     private void UpdateOnGround()
