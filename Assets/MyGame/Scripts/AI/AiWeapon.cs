@@ -52,7 +52,7 @@ public class AiWeapon : MonoBehaviour
         StartCoroutine(Equip());
     }
 
-    IEnumerator Equip()
+    private IEnumerator Equip()
     {
         animator.SetBool("Equip", true);
         yield return new WaitForSeconds(0.5f);

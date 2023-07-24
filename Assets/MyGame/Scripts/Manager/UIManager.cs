@@ -238,7 +238,7 @@ public class UIManager : BaseManager<UIManager>
 
         if (curPopup != null)
         {
-            var curName = curScreen.GetType().Name;
+            var curName = curPopup.GetType().Name;
             if (curName.Equals(popupName))
             {
                 result = curPopup;

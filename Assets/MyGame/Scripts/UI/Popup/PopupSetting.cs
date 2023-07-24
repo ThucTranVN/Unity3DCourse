@@ -13,10 +13,13 @@ public class PopupSetting : BasePopup
     public override void Show(object data)
     {
         base.Show(data);
-        bgmVolume = PlayerPrefs.GetFloat("BGM",0.75f);
-        effectVolume = PlayerPrefs.GetFloat("Effect", 0.75f);
-        sliderBGM.value = bgmVolume;
-        sliderEffect.value = effectVolume;
+        if (AudioManager.HasInstance)
+        {
+            bgmVolume = AudioManager.Instance.AttachBGMSource.volume;
+            effectVolume = AudioManager.Instance.AttachSESource.volume;
+            sliderBGM.value = bgmVolume;
+            sliderEffect.value = effectVolume;
+        }
     }
 
     public override void Hide()
@@ -41,7 +44,18 @@ public class PopupSetting : BasePopup
 
     public void OnApplySetting()
     {
+        if (AudioManager.HasInstance)
+        {
+            if(bgmVolume != AudioManager.Instance.AttachBGMSource.volume)
+            {
+                AudioManager.Instance.ChangeBGMVolume(bgmVolume);
+            }
 
+            if(effectVolume != AudioManager.Instance.AttachSESource.volume)
+            {
+                AudioManager.Instance.ChangeSEVolume(effectVolume);
+            }
+        }
         this.Hide();
     }
     
