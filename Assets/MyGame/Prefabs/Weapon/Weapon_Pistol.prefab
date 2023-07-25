@@ -28971,7 +28971,7 @@ MonoBehaviour:
     m_Bits: 4097
   ammoCount: 15
   totalAmmo: 15
-  damage: 20
+  damage: 10
 --- !u!114 &-5712687851035014815
 MonoBehaviour:
   m_ObjectHideFlags: 0
