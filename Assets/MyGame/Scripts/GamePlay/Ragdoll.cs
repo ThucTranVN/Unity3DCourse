@@ -11,28 +11,27 @@ public class Ragdoll : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         rigidBodies = GetComponentsInChildren<Rigidbody>();
-       
         DeactiveRagdoll();
     }
 
     public void DeactiveRagdoll()
     {
+        animator.enabled = true;
+
         foreach (var rigidBody in rigidBodies)
         {
             rigidBody.isKinematic = true;
-        }
-
-        animator.enabled = true;
+        }    
     }
 
     public void ActiveRagdoll()
     {
+        animator.enabled = false;
+
         foreach (var rigidBody in rigidBodies)
         {
             rigidBody.isKinematic = false;
-        }
-
-        animator.enabled = false;
+        }      
     }
 
     public void ApplyForce(Vector3 force , Rigidbody rigidbody)

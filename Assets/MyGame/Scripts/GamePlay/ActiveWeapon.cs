@@ -100,6 +100,18 @@ public class ActiveWeapon : MonoBehaviour
         return GetWeapon(activeWeaponIdx);
     }
 
+    public void DropWeapon()
+    {
+        var currentWeapon = GetActiveWeapon();
+        if (currentWeapon)
+        {
+            currentWeapon.transform.SetParent(null);
+            currentWeapon.gameObject.GetComponent<BoxCollider>().enabled = true;
+            currentWeapon.gameObject.AddComponent<Rigidbody>();
+            equippedWeapons[activeWeaponIdx] = null;
+        }
+    }
+
     private void SetActiveWeapon(WeaponSlot weaponSlot)
     {
         int holsterIndex = activeWeaponIdx;

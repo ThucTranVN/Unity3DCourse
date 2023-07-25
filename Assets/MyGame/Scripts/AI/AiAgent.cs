@@ -15,11 +15,13 @@ public class AiAgent : MonoBehaviour
     [HideInInspector]
     public UIHealthBar healthBar;
     [HideInInspector]
-    public Health health;
+    public AiHealth health;
     [HideInInspector]
     public Transform playerTransform;
     [HideInInspector]
     public AiWeapon weapons;
+    [HideInInspector]
+    public Animator animator;
 
     void Start()
     {
@@ -27,8 +29,9 @@ public class AiAgent : MonoBehaviour
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        health = GetComponent<Health>();
+        health = GetComponent<AiHealth>();
         ragdoll = GetComponent<Ragdoll>();
         healthBar = GetComponentInChildren<UIHealthBar>();
         weapons = GetComponent<AiWeapon>();
@@ -44,5 +47,15 @@ public class AiAgent : MonoBehaviour
     void Update()
     {
         stateMachine.Update();
+    }
+
+    public void DisableAll()
+    {
+        animator.enabled = false;
+        navMeshAgent.enabled = false;
+        health.enabled = false;
+        ragdoll.enabled = false;
+        healthBar.enabled = false;
+        weapons.enabled = false;
     }
 }

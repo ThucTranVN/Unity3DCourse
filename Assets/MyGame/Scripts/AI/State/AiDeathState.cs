@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AiDeathState : AiState
 {
@@ -23,8 +24,9 @@ public class AiDeathState : AiState
         direction.y = 1f;
         agent.ragdoll.ApplyForce(direction * dieForce, rigidbody);
         agent.healthBar.Deactive();
-        agent.health.DestroyWhenDeath();
         agent.weapons.DropWeapon();
+        agent.health.DestroyWhenDeath();
+        agent.DisableAll();
     }
 
     public void Exit(AiAgent agent)
@@ -36,4 +38,5 @@ public class AiDeathState : AiState
     {
         
     }
+
 }

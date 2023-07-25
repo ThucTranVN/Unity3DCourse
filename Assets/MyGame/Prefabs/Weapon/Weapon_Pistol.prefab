@@ -28966,9 +28966,12 @@ MonoBehaviour:
   raycastDestination: {fileID: 0}
   weaponRecoil: {fileID: 0}
   magazine: {fileID: 5122529342688488634}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4097
   ammoCount: 15
   totalAmmo: 15
-  damage: 10
+  damage: 20
 --- !u!114 &-5712687851035014815
 MonoBehaviour:
   m_ObjectHideFlags: 0

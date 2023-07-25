@@ -18,6 +18,8 @@ public class AiIdleState : AiState
         {
             maxSightDistance = DataManager.Instance.GlobalConfig.maxSight;
         }
+        agent.weapons.DeActivateWeapon();
+        agent.navMeshAgent.ResetPath();
     }
 
     public void Exit(AiAgent agent)
@@ -27,6 +29,11 @@ public class AiIdleState : AiState
 
     public void Update(AiAgent agent)
     {
+        if (agent.playerTransform.GetComponent<Health>().IsDead())
+        {
+            return;
+        }
+
         playerDirection = agent.playerTransform.position - agent.transform.position;
 
         if(playerDirection.magnitude > maxSightDistance)

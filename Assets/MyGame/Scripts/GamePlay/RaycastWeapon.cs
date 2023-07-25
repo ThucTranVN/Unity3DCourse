@@ -19,6 +19,7 @@ public class RaycastWeapon : MonoBehaviour
     public Transform raycastDestination;
     public WeaponRecoil weaponRecoil;
     public GameObject magazine;
+    public LayerMask layerMask;
 
     public int ammoCount;
     public int totalAmmo;
@@ -140,7 +141,7 @@ public class RaycastWeapon : MonoBehaviour
         float distance = direction.magnitude;
         ray.origin = start;
         ray.direction = direction;
-        if(Physics.Raycast(ray, out hitInfo, distance))
+        if(Physics.Raycast(ray, out hitInfo, distance, layerMask))
         {
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;

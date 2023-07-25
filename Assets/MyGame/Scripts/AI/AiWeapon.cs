@@ -64,6 +64,26 @@ public class AiWeapon : MonoBehaviour
         weaponActive = true;
     }
 
+    public void DeActivateWeapon()
+    {
+        SetTarget(null);
+        SetFiring(false);
+        StartCoroutine(Holster());
+    }
+
+    private IEnumerator Holster()
+    {
+        weaponActive = false;
+        animator.SetBool("Equip", false);
+        yield return new WaitForSeconds(0.5f);
+        while (animator.GetCurrentAnimatorStateInfo(1).normalizedTime < 1.0f)
+        {
+            yield return null;
+        }
+        weaponIK.SetAimTransform(currentWeapon.raycastOrigin);
+        
+    }
+
     public bool HasWeapon()
     {
         return currentWeapon != null;
@@ -73,9 +93,9 @@ public class AiWeapon : MonoBehaviour
     {
         if (currentWeapon)
         {
-            currentWeapon.transform.SetParent(null);
-            currentWeapon.gameObject.GetComponent<BoxCollider>().enabled = true;
-            currentWeapon.gameObject.AddComponent<Rigidbody>();
+            //currentWeapon.transform.SetParent(null);
+            //currentWeapon.gameObject.GetComponent<BoxCollider>().enabled = true;
+            //currentWeapon.gameObject.AddComponent<Rigidbody>();
             currentWeapon = null;
         }
     }
