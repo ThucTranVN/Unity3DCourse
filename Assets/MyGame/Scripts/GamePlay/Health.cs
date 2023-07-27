@@ -13,6 +13,13 @@ public class Health : MonoBehaviour
         OnStart();
     }
 
+    public void TakeHealth(float amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Min(currentHealth, maxHealth);
+        OnHealth(amount);
+    }
+
     public void TakeDamage(float amount, Vector3 direction, Rigidbody rigidbody)
     {
         currentHealth -= amount;
@@ -61,6 +68,11 @@ public class Health : MonoBehaviour
     }
 
     protected virtual void OnDamage(Vector3 direction, Rigidbody rigidbody)
+    {
+
+    }
+
+    protected virtual void OnHealth(float amount)
     {
 
     }

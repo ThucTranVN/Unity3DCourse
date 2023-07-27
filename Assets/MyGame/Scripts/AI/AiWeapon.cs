@@ -11,6 +11,7 @@ public class AiWeapon : MonoBehaviour
     private AiWeaponIK weaponIK;
     private Transform currentTarget;
     private bool weaponActive = false;
+    public bool WeaponActive => weaponActive;
 
     private void Start()
     {
@@ -54,6 +55,7 @@ public class AiWeapon : MonoBehaviour
 
     private IEnumerator Equip()
     {
+        animator.runtimeAnimatorController = currentWeapon.animator;
         animator.SetBool("Equip", true);
         yield return new WaitForSeconds(0.5f);
         while (animator.GetCurrentAnimatorStateInfo(1).normalizedTime < 1.0f)

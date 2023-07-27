@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScreenGame : BaseScreen
 {
     [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI magazineText;
 
     public override void Init()
     {
@@ -32,6 +33,7 @@ public class ScreenGame : BaseScreen
             if(weapon.equipWeaponBy == EquipWeaponBy.Player)
             {
                 ammoText.text = weapon.ammoCount.ToString();
+                magazineText.text = weapon.magazineSize.ToString();
             }
         }
     }

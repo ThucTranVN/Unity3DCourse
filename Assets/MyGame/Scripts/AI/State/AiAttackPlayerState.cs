@@ -25,6 +25,23 @@ public class AiAttackPlayerState : AiState
         {
             agent.stateMachine.ChangeState(AiStateID.Idle);
         }
+
+        Vector3 playerDirection = agent.playerTransform.position - agent.transform.position;
+
+        Vector3 agentDirection = agent.transform.forward;
+
+        playerDirection.Normalize();
+
+        float dotProduct = Vector3.Dot(playerDirection, agentDirection);
+
+        if (dotProduct <= 0)
+        {
+            agent.weapons.SetFiring(false);
+        }
+        else
+        {
+            agent.weapons.SetFiring(true);
+        }
     }
 
     public void Exit(AiAgent agent)

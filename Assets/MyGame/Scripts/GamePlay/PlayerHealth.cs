@@ -34,6 +34,15 @@ public class PlayerHealth : Health
         }
     }
 
+    protected override void OnHealth(float amount)
+    {
+        if (postProcessing.profile.TryGet(out Vignette vignette))
+        {
+            float percent = 1.0f - (currentHealth / maxHealth);
+            vignette.intensity.value = percent * maxValue;
+        }
+    }
+
     protected override void OnDeath(Vector3 direction, Rigidbody rigidbody)
     {
         ragdoll.ActiveRagdoll();

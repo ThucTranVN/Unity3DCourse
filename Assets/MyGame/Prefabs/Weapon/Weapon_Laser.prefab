@@ -29217,6 +29217,7 @@ MonoBehaviour:
   raycastDestination: {fileID: 0}
   weaponRecoil: {fileID: 0}
   magazine: {fileID: 9189178538709055479}
+  animator: {fileID: 9100000, guid: 21e716812fa004e9e9fa11b24709fe15, type: 2}
   layerMask:
     serializedVersion: 2
     m_Bits: 4097

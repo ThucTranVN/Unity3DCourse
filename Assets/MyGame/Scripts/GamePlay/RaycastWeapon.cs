@@ -14,15 +14,16 @@ public class RaycastWeapon : MonoBehaviour
     public ParticleSystem[] muzzleFlash;
     public ParticleSystem hitEffect;
     public TrailRenderer tracerEffect;
-
     public Transform raycastOrigin;
     public Transform raycastDestination;
     public WeaponRecoil weaponRecoil;
     public GameObject magazine;
+    public RuntimeAnimatorController animator;
     public LayerMask layerMask;
 
     public int ammoCount;
     public int totalAmmo;
+    public int magazineSize = 2;
     public float damage = 10f;
 
     private Ray ray;
@@ -60,6 +61,22 @@ public class RaycastWeapon : MonoBehaviour
         accumulatedTime += deltaTime;
 
         UpdateBullets(deltaTime);
+    }
+
+    public bool CanReload()
+    {
+        return ammoCount == 0 && magazineSize > 0;
+    }
+
+    public bool EmptyAmmo()
+    {
+        return ammoCount == 0 && magazineSize == 0;
+    }
+
+    public void RefillAmmo()
+    {
+        ammoCount = totalAmmo;
+        magazineSize--;
     }
 
     private void UpdateFiring(float deltaTime, Vector3 target)

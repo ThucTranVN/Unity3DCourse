@@ -58,10 +58,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5301066863683065312, guid: cf292f0a12e0e4660b80155cdda2b3d2, type: 3}
       propertyPath: m_Time
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5301066863683065312, guid: cf292f0a12e0e4660b80155cdda2b3d2, type: 3}
       propertyPath: m_Emitting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301066863683065312, guid: cf292f0a12e0e4660b80155cdda2b3d2, type: 3}
+      propertyPath: m_Autodestruct
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301066863683065312, guid: cf292f0a12e0e4660b80155cdda2b3d2, type: 3}
+      propertyPath: m_Parameters.textureMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5301066863683065313, guid: cf292f0a12e0e4660b80155cdda2b3d2, type: 3}

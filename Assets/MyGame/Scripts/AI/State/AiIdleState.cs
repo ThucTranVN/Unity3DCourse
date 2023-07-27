@@ -18,7 +18,10 @@ public class AiIdleState : AiState
         {
             maxSightDistance = DataManager.Instance.GlobalConfig.maxSight;
         }
-        agent.weapons.DeActivateWeapon();
+        if (agent.weapons.HasWeapon())
+        {
+            agent.weapons.DeActivateWeapon();
+        }
         agent.navMeshAgent.ResetPath();
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GlobalConfig : ScriptableObject
 {
     [Header("AI")]
-    public float maxTime = 1f;
+    public float maxTime = 0.5f;
     public float maxDistance = 1f;
     public float aiMaxHealth = 100f;
     public float blinkDuration = 0.1f;

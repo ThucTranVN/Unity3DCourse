@@ -32,7 +32,7 @@ public class CharacterLocomotion : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         activeWeapon = GetComponent<ActiveWeapon>();
-        reloadWeapon = GetComponent<WeaponReload>();
+        reloadWeapon = GetComponent<WeaponReload>();    
         characterAiming = GetComponent<CharacterAiming>();
         if (DataManager.HasInstance)
         {
@@ -89,10 +89,13 @@ public class CharacterLocomotion : MonoBehaviour
         bool isSprinting = IsSprinting();
         animator.SetBool(isSprintingParam, isSprinting);
         rigController.SetBool(isSprintingParam, isSprinting);
-        if (postProcessVolume.profile.TryGet(out ChromaticAberration chromaticAberration))
+        if (userInput.x != 0)
         {
-            chromaticAberration.active = isSprinting;
-        }
+            if (postProcessVolume.profile.TryGet(out ChromaticAberration chromaticAberration))
+            {
+                chromaticAberration.active = isSprinting;
+            }
+        }  
     }
 
     private void UpdateOnGround()
