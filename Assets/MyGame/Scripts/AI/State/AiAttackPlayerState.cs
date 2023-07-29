@@ -19,7 +19,10 @@ public class AiAttackPlayerState : AiState
 
     public void Update(AiAgent agent)
     {
-        agent.navMeshAgent.destination = agent.playerTransform.position;
+        if (agent.navMeshAgent.enabled)
+        {
+            agent.navMeshAgent.destination = agent.playerTransform.position;
+        }
 
         if (agent.playerTransform.GetComponent<Health>().IsDead())
         {
