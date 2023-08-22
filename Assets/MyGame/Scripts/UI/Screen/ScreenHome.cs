@@ -6,6 +6,14 @@ using TMPro;
 
 public class ScreenHome : BaseScreen
 {
+    private void OnEnable()
+    {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlayBGM(AUDIO.BGM_BGM_3);
+        }
+    }
+
     public override void Show(object data)
     {
         base.Show(data);

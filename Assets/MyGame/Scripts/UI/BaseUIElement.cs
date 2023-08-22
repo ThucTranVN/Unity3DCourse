@@ -38,6 +38,23 @@ public class BaseUIElement : MonoBehaviour
         SetActiveCanvasGroup(false);
     }
 
+    public virtual void OnButtonClickSound()
+    {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BTNCLICK);
+        }
+    }
+
+    public virtual void OnButtonHoverSound()
+    {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_BTNHOVER);
+        }
+    }
+
+
     private void SetActiveCanvasGroup(bool isActive)
     {
         if(CanvasGroup != null)

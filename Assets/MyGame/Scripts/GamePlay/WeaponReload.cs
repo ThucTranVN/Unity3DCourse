@@ -27,6 +27,8 @@ public class WeaponReload : MonoBehaviour
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
         if (weapon)
         {
+            if (weapon.EmptyAmmo()) return;
+
             if (Input.GetKeyDown(KeyCode.R) || weapon.CanReload())
             {
                 isReloading = true;
@@ -57,6 +59,10 @@ public class WeaponReload : MonoBehaviour
 
     private void DetachMagazine()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_EJECTMAGAZINE);
+        }
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
         magazineHand = Instantiate(weapon.magazine, leftHand, true);
         weapon.magazine.SetActive(false);
@@ -79,6 +85,10 @@ public class WeaponReload : MonoBehaviour
 
     private void AttachMagazine()
     {
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_INSERTMAGAZINE);
+        }
         RaycastWeapon weapon = activeWeapon.GetActiveWeapon();
         weapon.magazine.SetActive(true);
         Destroy(magazineHand);

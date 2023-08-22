@@ -10,6 +10,18 @@ public class PopupSetting : BasePopup
     public Slider sliderBGM;
     public Slider sliderEffect;
 
+    public override void Init()
+    {
+        base.Init();
+        if (AudioManager.HasInstance)
+        {
+            bgmVolume = AudioManager.Instance.AttachBGMSource.volume;
+            effectVolume = AudioManager.Instance.AttachSESource.volume;
+            sliderBGM.value = bgmVolume;
+            sliderEffect.value = effectVolume;
+        }
+    }
+
     public override void Show(object data)
     {
         base.Show(data);

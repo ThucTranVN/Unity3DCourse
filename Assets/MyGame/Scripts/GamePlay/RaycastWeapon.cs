@@ -70,13 +70,16 @@ public class RaycastWeapon : MonoBehaviour
 
     public bool EmptyAmmo()
     {
-        return ammoCount == 0 && magazineSize == 0;
+        return ammoCount == 0 && magazineSize <= 0;
     }
 
     public void RefillAmmo()
     {
-        ammoCount = totalAmmo;
-        magazineSize--;
+        if(magazineSize > 0)
+        {
+            magazineSize--;
+            ammoCount = totalAmmo;
+        }
     }
 
     private void UpdateFiring(float deltaTime, Vector3 target)
